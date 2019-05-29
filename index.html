@@ -1,0 +1,104 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html >
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" 
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link rel="stylesheet" href="app.css">
+</head>
+<body ng-app="myApp">
+
+	<div class="sidenav" align="center">
+	
+		<a class="" href=""><img src="7JwYxATg.png"  width="100%"></a>
+		<div class="divider">
+			<p><i class="far fa-lightbulb"></i>&nbsp; Smart Filters</p>
+			<hr>
+			<div class="row">
+				<div class="col-md-6"><i class="fas fa-check-circle fa-2x"></i></div>
+				<label class="switch">
+					<input type="checkbox" checked>
+					<span class="slider round"></span>
+				</label>
+				<div class="col-md-6"><i class="far fa-calendar-alt fa-2x"></i></div>
+				<label class="switch">
+					<input type="checkbox" checked>
+					<span class="slider round"></span>
+				</label>
+				<div class="col-md-6"><i class="far fa-heart fa-2x"></i></div>
+				<label class="switch">
+					<input type="checkbox" checked>
+					<span class="slider round"></span>
+				</label>
+			</div>
+			<hr>
+			
+			<p>Status</p>
+			<div class="input-group input-focus">
+				<div class="input-group-prepend">
+				<span class="input-group-text bg-white"><i class="fa fa-search"></i></span>
+				</div>
+				<input type="search" placeholder="Search" class="form-control form-control-lg border-left-0">
+			</div>
+			<br>
+			<button type="button" class="btn btn-light btn-lg btn-block">DELIVERED</button>
+		</div>
+	</div>
+	<!-- MAIN CONTENT AND INJECTED VIEWS -->
+	<div id="main" ng-controller="MainController">
+		<!-- <hr class="hr-vertical1" align="left"> -->
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav" align="center">
+					<li class="nav-item nav-link active" href=""><i class="fa fa-home"></i><br>Home</li>
+					<li class="nav-item nav-link" href=""><i class="far fa-envelope"></i><br>Messages</li>
+					<li class="nav-item nav-link" href=""><i class="fa fa-star"></i><br>Wishlist</li>
+					<li class="nav-item nav-link" href=""><i class="fa fa-cog"></i><br>Settings</li>
+					<li class="nav-item nav-link" href=""><i class="fa fa-user"></i><br>My Account</li>
+				</ul>
+			</div>
+		</nav>
+		<br>
+		<div class="row">
+			<div class="col-md-2" style="color:orange;">&nbsp;&nbsp;<i class="fas fa-check-circle fa-2x"></i></div>
+			<div class="input-group input-focus col-md-4 offset-md-6">
+				<div class="input-group-prepend">
+				<span class="input-group-text bg-white"><i class="fa fa-search"></i></span>
+				</div>
+				<input  ng-model="search" type="search" placeholder="Search" class="form-control form-control-lg border-left-0">
+			</div>
+		</div>
+		<div ng-repeat="obj in list | filter:search" class="row item">
+			<div class="col-md-1 item2" style="color:orange;">&nbsp;&nbsp;<i class="fas fa-check-circle fa-2x"></i></div>
+			<div class=" alert alert-light col-md-11">
+					<div class=" row">
+						<div align="center" class="divider col-md-2"style="padding: 10px;">{{obj.date | date:'EEEE'}}<br>{{obj.date | date:'d H:mm'}}<br>{{obj.date | date:'a'}}</div>
+						<div align="center"  class="col-md-1 item"><i class="fas fa-location-arrow fa-2x"></i></div>
+						<div align="center"  class="divider col-md-3 align-middle" > {{obj.originPlace}}<br><i class="fas fa-chevron-down fa-2x"></i><br> {{obj.destinationPlace}}</div>
+						<div align="center"  class="col-md-1 item"><i class="fas fa-truck fa-3x"></i></div>
+						<div align="center" class="col-md-3 item"><h1>{{obj.price | currency}}</h1></div>
+						<div align="center" class="col-md-1 item"><button type="button" class="btn btn-danger btn-lg btn-block">{{obj.count}}</button></div>
+						<div align="center" class="col-md-1 item"><i class="fas fa-ellipsis-v fa-2x"></i></div>
+
+					</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+	<script src="http://unpkg.com/@uirouter/angularjs/release/angular-ui-router.js"></script>
+	<script src="app.js"></script>
+	<script>
+			$(function() {
+				$('.nav-item').click(function() {
+					$('li.active').removeClass('active');
+					$(this).addClass('active');
+				});
+			});
+	</script>
+</body>
+</html>
